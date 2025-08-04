@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Do You Love Me Suchi?</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0f0f0f;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #ff69b4;
+      margin-top: 50px;
+    }
+
+    #button-container {
+      margin-top: 80px;
+      position: relative;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      margin: 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    #yes-btn {
+      background-color: #00ff7f;
+      color: black;
+    }
+
+    #no-btn {
+      background-color: #ff4500;
+      color: white;
+      position: absolute;
+    }
+
+    #message {
+      margin-top: 30px;
+      font-size: 1.8em;
+      color: #00ffff;
+      display: none;
+    }
+
+    #neon-heart {
+      width: 120px;
+      height: 120px;
+      margin: 30px auto;
+      display: none;
+      position: relative;
+    }
+
+    #neon-heart::before,
+    #neon-heart::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 60px;
+      height: 96px;
+      background: #ff1493;
+      border-radius: 60px 60px 0 0;
+      transform: rotate(-45deg);
+      transform-origin: 0 100%;
+      box-shadow: 0 0 20px #ff1493, 0 0 40px #ff1493, 0 0 60px #ff1493;
+    }
+
+    #neon-heart::after {
+      left: 60px;
+      transform: rotate(45deg);
+      transform-origin: 100% 100%;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+      }
+    }
+
+    #neon-heart {
+      animation: pulse 1s infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>DO YOU LOVE ME SUCHI? 🥹💞</h1>
+
+  <div id="button-container">
+    <button id="yes-btn">Yes</button>
+    <button id="no-btn">No</button>
+  </div>
+
+  <div id="message">🎉 Congratulations Suchismita! You are in love with Sayan 💕</div>
+  <div id="neon-heart"></div>
+
+  <script>
+    emailjs.init("yK8BWCHoCzwA1b5DZ"); // Replace with your EmailJS Public Key
+
+    const noBtn = document.getElementById("no-btn");
+    const yesBtn = document.getElementById("yes-btn");
+    const message = document.getElementById("message");
+    const heart = document.getElementById("neon-heart");
+
+    // Move "No" button
+    noBtn.addEventListener("click", () => {
+      const maxX = window.innerWidth - noBtn.offsetWidth;
+      const maxY = window.innerHeight - noBtn.offsetHeight;
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+      noBtn.style.left = `${randomX}px`;
+      noBtn.style.top = `${randomY}px`;
+    });
+
+    // On "Yes" click
+    yesBtn.addEventListener("click", () => {
+      message.style.display = "block";
+      heart.style.display = "block";
+
+      emailjs.send("service_6yc8vk4", "template_xhbw44o", {
+        to_name: "Suchismita",
+        from_name: "Sayan",
+        message: "Suchismita clicked YES! 💖"
+      }).then(() => {
+        console.log("Email sent successfully");
+      }).catch((err) => {
+        console.error("Email sending failed", err);
+      });
+    });
+  </script>
+
+</body>
+</html>
